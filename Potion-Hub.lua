@@ -23,25 +23,25 @@ local JSONEncode, JSONDecode = function(Input)
 end, function(Input)
 	return game:GetService("HttpService"):JSONDecode(Input)
 end
-local UI = game:GetObjects("rbxassetid://7938972245")[1]
+local UI = game:GetObjects("rbxassetid://7941828586")[1]
 UI.Parent = game:GetService("CoreGui")
 local Prefix
 local file
-if not isfolder("Potion-Hub") then
-	makefolder("Potion-Hub")
+if not isfolder("PotionHub") then
+	makefolder("PotionHub")
 end
-if not isfolder("Potion-Hub/Presets") then
-	makefolder("Potion-Hub/Presets")
+if not isfolder("PotionHub/Presets") then
+	makefolder("PotionHub/Presets")
 end
-local List = listfiles("Potion-Hub/Presets")
-if not isfolder("Potion-Hub/Theme") then
-	makefolder("Potion-Hub/Theme")
+local List = listfiles("PotionHub/Presets")
+if not isfolder("PotionHub/Theme") then
+	makefolder("PotionHub/Theme")
 end
-if not isfolder("Potion-Hub/Assets") then
-	makefolder("Potion-Hub/Assets")
+if not isfolder("PotionHub/Assets") then
+	makefolder("PotionHub/Assets")
 end
-if not isfile("Potion-Hub/Assets/Changes.config") then
-	writefile("Potion-Hub/Assets/Changes.config", "{}")
+if not isfile("PotionHub/Assets/Changes.config") then
+	writefile("PotionHub/Assets/Changes.config", "{}")
 end
 if isfile("config.vh") then
 	file = readfile("config.vh")
@@ -52,8 +52,8 @@ else
 	}))
 	file = readfile("config.vh")
 end
-if not isfile("Potion-Hub/Presets/Defauult.preset") then
-	writefile("Potion-Hub/Presets/Default.preset", "for i, v in next, tools do\n    coroutine.wrap(\n        function()\n            local BP, BG, F = v.POSV.Value, v.GYROV.Value\n            local a, vol = 1, 0\n            while vis do\n                vol = tools[#tools].Handle.Sound.PlaybackLoudness / sens\n                ro = math.rad(a / 2 + (i * (360 / #tools)))\n                F = CFrame.new(torso.Position) * CFrame.Angles(0, ro, 0) * CFrame.new(0, 0, vol + offset)\n                BP.Position = F.p\n                BG.CFrame = CFrame.new(BG.Parent.Position, torso.Position + Vector3.new(0,tilt+math.sin(-vol*2),0))\n                a = a + speed / 2.5\n                game:GetService(\"RunService\").Heartbeat:wait()\n                v.Handle.Velocity = Vector3.new(0, 0, 30)\n                v.Handle.AssemblyLinearVelocity = Vector3.new(30,0,0)\n            end\n        end\n    )()\nend\n    ")
+if not isfile("PotionHub/Presets/Default.preset") then
+	writefile("PotionHub/Presets/Default.preset", "for i, v in next, tools do\n    coroutine.wrap(\n        function()\n            local BP, BG, F = v.POSV.Value, v.GYROV.Value\n            local a, vol = 1, 0\n            while vis do\n                vol = tools[#tools].Handle.Sound.PlaybackLoudness / sens\n                ro = math.rad(a / 2 + (i * (360 / #tools)))\n                F = CFrame.new(torso.Position) * CFrame.Angles(0, ro, 0) * CFrame.new(0, 0, vol + offset)\n                BP.Position = F.p\n                BG.CFrame = CFrame.new(BG.Parent.Position, torso.Position + Vector3.new(0,tilt+math.sin(-vol*2),0))\n                a = a + speed / 2.5\n                game:GetService(\"RunService\").Heartbeat:wait()\n                v.Handle.Velocity = Vector3.new(0, 0, 30)\n                v.Handle.AssemblyLinearVelocity = Vector3.new(30,0,0)\n            end\n        end\n    )()\nend\n    ")
 end
 local Player = game:GetService("Players").LocalPlayer
 local Char = Player.Character
@@ -288,7 +288,7 @@ function Dupe(Amount)
 	Player.Character.HumanoidRootPart.CFrame = Pos
 end
 function ChangeLog(aFeature1, aFeature2, aFixes1, aFixes2)
-	local Gui = game:GetObjects("rbxassetid://7391627267")[1]
+	local Gui = game:GetObjects("rbxassetid://7941477219")[1]
 	Gui.Parent = game:GetService("CoreGui")
 	local Main = Gui["Main"]
 	local Features, Fixes = Main["New"], Main["Fixes"]
@@ -312,7 +312,7 @@ function ChangeLog(aFeature1, aFeature2, aFixes1, aFixes2)
 	end
 	if aFixes1 then
 		Fixes1["Visible"] = true
-		Fixes1["Text"] = "    Fixed themes not working (I messed up the version)\n    "
+		Fixes1["Text"] = "    Hopefully fixed script not loading for some users (hopefully)\n    "
 	end
 	if aFixes2 then
 		Fixes2["Visible"] = true
@@ -321,7 +321,7 @@ function ChangeLog(aFeature1, aFeature2, aFixes1, aFixes2)
 	Main:TweenPosition(UDim2.new(.499, 0, .499, 0), "Out", "Linear", .5)
 	wait(3)
 	Main:TweenPosition(UDim2.new(.499, 0, 2, 0), "Out", "Linear", .5)
-	writefile("Potion-Hub/Assets/Changes.config", JSONEncode({
+	writefile("PotionHub/Assets/Changes.config", JSONEncode({
 		["ChangeVer"] = "1"
 	}))
 end
@@ -337,7 +337,7 @@ local LogFrame = Layout.Frame4
 local DecodeFrame = Layout.Frame5
 local VisualFrame = Layout.Frame6
 local CmdFrame = Layout.Frame7
-local SettingFrame = Layout.Frame8
+local MiscFrame = Layout.Frame8
 local gButton = SideLayout.Button1
 local pButton = SideLayout.Button2
 local alButton = SideLayout.Button3
@@ -357,11 +357,11 @@ local WorkspaceL = LogFrame.Layout.Workspace
 local GameL = LogFrame.Layout.Game
 local lDecode = LogFrame.Layout.Decode
 local Play = LogFrame.Layout.Play
-local GrabTools = SettingFrame.GrabTools
+local GrabTools = MiscFrame.GrabTools
 local dPlay = DecodeFrame.Play
-local presetButton = SettingFrame.PresetMaker
+local presetButton = MiscFrame.PresetMaker
 local Sync2 = VisualFrame.Sync
-local BackButton = SettingFrame.BackPlay
+local BackButton = MiscFrame.BackPlay
 local PlrName = Side.plrname
 local PlrVH = Side.plrvhid
 local PlrIcon = Side.plricon
@@ -1065,7 +1065,7 @@ cButton.MouseButton1Down:connect(function()
 	Layout.UIPageLayout:JumpTo(CmdFrame)
 end)
 sButton.MouseButton1Down:connect(function()
-	Layout.UIPageLayout:JumpTo(SettingFrame)
+	Layout.UIPageLayout:JumpTo(MiscFrame)
 end)
 for i = 1, #Commands do
 	local Holder = CmdFrame.Back.Holder:clone()
@@ -1149,7 +1149,7 @@ while pg do
 		pg = false
 	end
 end
-List = listfiles("Potion-Hub/Presets")
+List = listfiles("PotionHub/Presets")
 for i, v in next, List do
 	for i = #List, #List do
 		local Holder = VisualFrame.Back.Holder:clone()
@@ -1163,7 +1163,7 @@ for i, v in next, List do
 	end
 end
 Refresh.MouseButton1Down:connect(function()
-	List = listfiles("Potion-Hub/Presets")
+	List = listfiles("PotionHub/Presets")
 	for i, v in next, VisualFrame.Back.Presets:GetChildren() do
 		if v:IsA("Frame") then
 			v:remove()
@@ -1205,7 +1205,7 @@ VisButton.MouseButton1Down:connect(function()
 			ID = Tool.Handle.Sound.SoundId:gsub("http://www.roblox.com/asset/%?id=", "", 1)
 			Time = Tool.Handle.Sound.TimePosition
 			char.Humanoid:UnequipTools()
-			Visual(readfile("Potion-Hub/Presets/" .. selected, true))
+			Visual(readfile("PotionHub/Presets/" .. selected, true))
 			Speed.Text = ""
 			Offset.Text = ""
 			Sensitivity.Text = ""
@@ -1223,7 +1223,7 @@ VisButton.MouseButton1Down:connect(function()
 				end
 			end
 		else
-			Visual(readfile("Potion-Hub/Presets/" .. selected, true))
+			Visual(readfile("PotionHub/Presets/" .. selected, true))
 			for i, v in next, char.Humanoid:GetPlayingAnimationTracks() do
 				v:stop()
 			end
@@ -1282,18 +1282,18 @@ UIS.InputBegan:connect(function(InputObj, Process)
 	end
 end)
 function startTheme()
-	if readfile("Potion-Hub/Theme/theme.vh") then
+	if readfile("PotionHub/Theme/theme.vh") then
 		Main.Split:remove()
 		function gif(url)
 			fileName = math.random(1, 999999)
-			writefile("Potion-Hub/Assets/" .. fileName .. ".webm", Request({
+			writefile("PotionHub/Assets/" .. fileName .. ".webm", Request({
 				Url = url
 			}).Body)
 			return
 		end
 		themeImage.Visible = true
 		themeImage.ZIndex = 1
-		loadstring(readfile("Potion-Hub/Theme/theme.vh", true))()
+		loadstring(readfile("PotionHub/Theme/theme.vh", true))()
 		if Enabled then
 			gif(Theme["webmUrl"])
 			themeImage.Size = Theme["Image-Size"]
@@ -1326,10 +1326,10 @@ function startTheme()
 				end
 			end
 			if Theme.Animated then
-				themeImage["Video"] = GetAsset("Potion-Hub/Assets/" .. fileName .. ".webm")
+				themeImage["Video"] = GetAsset("PotionHub/Assets/" .. fileName .. ".webm")
 				themeImage:play()
 				wait(.2)
-				delfile("Potion-Hub/Assets/" .. fileName .. ".webm")
+				delfile("PotionHub/Assets/" .. fileName .. ".webm")
 			end
 		end
 	end
@@ -1343,7 +1343,7 @@ setfflag("AbuseReportScreenshotPercentage", 0)
 setfflag("DFFlagAbuseReportScreenshot", "False")
 UI["Name"] = str(15)
 changeversion = "1"
-changedecoded = JSONDecode(readfile("Potion-Hub/Assets/Changes.config"))
+changedecoded = JSONDecode(readfile("PotionHub/Assets/Changes.config"))
 if changedecoded["ChangeVer"] == changeversion then
 else
 	ChangeLog(true, false, true, false)
