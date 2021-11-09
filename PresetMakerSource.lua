@@ -1,4 +1,4 @@
-local UI = game:GetObjects("rbxassetid://7470816843")[1]
+local UI = game:GetObjects("rbxassetid://7948021402")[1]
 UI.Parent = game["CoreGui"]
 local TweenService = game:GetService("TweenService")
 loadstring(game:HttpGet("https://raw.githubusercontent.com/murderjj/Potion-Hub/main/Encrypt.lua"))()
